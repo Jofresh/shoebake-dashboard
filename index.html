@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoebake - Dashboard</title>
+    <meta
+      name="description"
+      content="Tableau de bord de la société Shoebake présentant des métriques telles que les ventes ou les meilleurs produits. Visualisez les données clés de l'entreprise grâce à ce tableau de bord."
+    />
+
+    <!-- Icon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="styles/style.css" />
+
+    <!-- Font -->
+    <link rel="preload" href="assets/fonts/Outfit.ttf" as="font" crossorigin />
+
+    <!-- Scripts (Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a href="#" class="sidebar__logo">
+          <img src="assets/images/logo.png" alt="logo" />
+          <span>Shoebake</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 96 960 960"
+            class="sidebar__close__button"
+          >
+            <path
+              d="M453 815 213 575l240-240 42 42-198 198 198 198-42 42Zm253 0L466 575l240-240 42 42-198 198 198 198-42 42Z"
+            />
+          </svg>
+        </a>
+
+        <nav class="sidebar__links">
+          <ul>
+            <li>
+              <a href="#" class="active">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 96 960 960"
+                >
+                  <path
+                    d="M120 546V216h330v330H120Zm0 390V606h330v330H120Zm390-390V216h330v330H510Zm0 390V606h330v330H510ZM180 486h210V276H180v210Zm390 0h210V276H570v210Zm0 390h210V666H570v210Zm-390 0h210V666H180v210Zm390-390Zm0 180Zm-180 0Zm0-180Z"
+                  />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="item--alertable" data-count="8">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 96 960 960"
+                >
+                  <path
+                    d="M160 856v-60h84V490q0-84 49.5-149.5T424 258v-29q0-23 16.5-38t39.5-15q23 0 39.5 15t16.5 38v29q81 17 131 82.5T717 490v306h83v60H160Zm320-295Zm0 415q-32 0-56-23.5T400 896h160q0 33-23.5 56.5T480 976ZM304 796h353V490q0-74-51-126t-125-52q-74 0-125.5 52T304 490v306Z"
+                  />
+                </svg>
+                <span>Notifications</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 96 960 960"
+                >
+                  <path
+                    d="M300 770q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0-164q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm0-164q12 0 21-9t9-21q0-12-9-21t-21-9q-12 0-21 9t-9 21q0 12 9 21t21 9Zm132 328h244v-60H432v60Zm0-164h244v-60H432v60Zm0-164h244v-60H432v60ZM180 936q-24 0-42-18t-18-42V276q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600V276H180v600Zm0-600v600-600Z"
+                  />
+                </svg>
+                <span>Commandes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="item--alertable" data-count="3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 96 960 960"
+                >
+                  <path
+                    d="M140 896q-24 0-42-18t-18-42V316q0-24 18-42t42-18h680q24 0 42 18t18 42v520q0 24-18 42t-42 18H140Zm340-302L140 371v465h680V371L480 594Zm0-60 336-218H145l335 218ZM140 371v-55 520-465Z"
+                  />
+                </svg>
+                <span>Messages</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 96 960 960"
+                >
+                  <path
+                    d="m388 976-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185 576q0-9 .5-20.5T188 535L80 456l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669 346l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592 850l-20 126H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410 576q0-29 20.5-49.5T480 506q29 0 49.5 20.5T550 576q0 29-20.5 49.5T480 646Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715 576q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538 348l-14-112h-88l-14 112q-34 7-63.5 24T306 414l-106-46-40 72 94 69q-4 17-6.5 33.5T245 576q0 17 2.5 33.5T254 643l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z"
+                  />
+                </svg>
+                <span>Paramètres</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar__upgrade">
+          <p>Passer à la version supérieure pour avoir plus de visuels.</p>
+          <a href="#">
+            <span>Offre Premium</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 96 960 960"
+            >
+              <path
+                d="m702 755-43-42 106-106H120v-60h646L660 441l42-42 178 178-178 178Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </aside>
+
+      <main class="dashboard">
+        <header class="dashboard__header">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 96 960 960"
+            class="sidebar__open__button"
+          >
+            <path
+              d="m255 815-42-42 198-198-198-198 42-42 240 240-240 240Zm253 0-42-42 198-198-198-198 42-42 240 240-240 240Z"
+            />
+          </svg>
+          <div class="searchbar">
+            <input type="text" placeholder="Rechercher..." />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+              <path
+                d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z"
+              />
+            </svg>
+          </div>
+          <div class="settings">
+            <div class="settings__language">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 96 960 960"
+                class="settings__language__icon"
+              >
+                <path
+                  d="M480 976q-84 0-157-31.5T196 859q-54-54-85-127.5T80 574q0-84 31-156.5T196 291q54-54 127-84.5T480 176q84 0 157 30.5T764 291q54 54 85 126.5T880 574q0 84-31 157.5T764 859q-54 54-127 85.5T480 976Zm0-58q35-36 58.5-82.5T577 725H384q14 60 37.5 108t58.5 85Zm-85-12q-25-38-43-82t-30-99H172q38 71 88 111.5T395 906Zm171-1q72-23 129.5-69T788 725H639q-13 54-30.5 98T566 905ZM152 665h159q-3-27-3.5-48.5T307 574q0-25 1-44.5t4-43.5H152q-7 24-9.5 43t-2.5 45q0 26 2.5 46.5T152 665Zm221 0h215q4-31 5-50.5t1-40.5q0-20-1-38.5t-5-49.5H373q-4 31-5 49.5t-1 38.5q0 21 1 40.5t5 50.5Zm275 0h160q7-24 9.5-44.5T820 574q0-26-2.5-45t-9.5-43H649q3 35 4 53.5t1 34.5q0 22-1.5 41.5T648 665Zm-10-239h150q-33-69-90.5-115T565 246q25 37 42.5 80T638 426Zm-254 0h194q-11-53-37-102.5T480 236q-32 27-54 71t-42 119Zm-212 0h151q11-54 28-96.5t43-82.5q-75 19-131 64t-91 115Z"
+                />
+              </svg>
+
+              <div class="dropdown">
+                <ul>
+                  <li>
+                    <img src="assets/images/fr.svg" alt="france" />
+                    <span>Français</span>
+                  </li>
+                  <li>
+                    <img src="assets/images/uk.svg" alt="royaume-uni" />
+                    <span>English</span>
+                  </li>
+                  <li>
+                    <img src="assets/images/es.svg" alt="espagne" />
+                    <span>Español</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="settings__profile">
+              <div class="profile__info">
+                <span class="profile__fullname">Kevin Burton</span>
+                <span class="profile__job">Chef de projet</span>
+              </div>
+              <div class="profile__avatar">
+                <img src="assets/images/avatar.png" alt="avatar" />
+              </div>
+              <div class="profile__expand">
+                <img src="assets/images/expand.svg" alt="avatar" />
+              </div>
+              <div class="dropdown">
+                <ul>
+                  <li>
+                    <img src="assets/images/profile.svg" alt="profil" />
+                    <span>Mon profil</span>
+                  </li>
+                  <li>
+                    <img src="assets/images/settings.svg" alt="paramètres" />
+                    <span>Paramètres</span>
+                  </li>
+                  <li>
+                    <img src="assets/images/logout.svg" alt="déconnexion" />
+                    <span>Déconnexion</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="dashboard__content">
+          <div class="dashboard__headline">
+            <h1>Vue d'ensemble</h1>
+            <div class="filters">
+              <div class="period__filter">
+                <span data-filter="day">Jour</span>
+                <span data-filter="week">Semaine</span>
+                <span data-filter="month" class="active">Mois</span>
+                <span data-filter="year">Année</span>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard__grid">
+            <!-- Mobile cards only -->
+            <div class="card visitors">
+              <div class="card__container">
+                <div class="metrics">
+                  <span class="metrics__name">Total visiteurs</span>
+                  <span class="metrics__value">8236</span>
+                </div>
+                <div class="percentage percentage--decrease">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 96 960 960"
+                  >
+                    <path
+                      d="M653 816v-60h127L539 515 372 682 80 391l43-43 248 248 167-167 283 283V589h59v227H653Z"
+                    />
+                  </svg>
+                  <span>-8%</span>
+                </div>
+              </div>
+            </div>
+            <div class="card profit">
+              <div class="card__container">
+                <div class="metrics">
+                  <span class="metrics__name">Bénéfice</span>
+                  <span class="metrics__value">12658€</span>
+                </div>
+                <div class="percentage percentage--increase">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 96 960 960"
+                  >
+                    <path
+                      d="m123 816-43-43 292-291 167 167 241-241H653v-60h227v227h-59V452L538 735 371 568 123 816Z"
+                    />
+                  </svg>
+                  <span class="increase">+32%</span>
+                </div>
+              </div>
+            </div>
+            <!-- Default cards -->
+            <div class="card incomes">
+              <h2 class="card__title">Revenus</h2>
+              <div class="card__container">
+                <canvas id="incomes"></canvas>
+              </div>
+            </div>
+            <div class="card best-products">
+              <h2 class="card__title">Top Produits</h2>
+              <div class="card__container">
+                <div class="products">
+                  <div class="product">
+                    <div
+                      src="assets/images/products/adidas-stan-smith-white.png"
+                      alt="product"
+                      class="product__image skeleton-image skeleton-anim"
+                    ></div>
+                    <div class="product__info">
+                      <span
+                        class="product__info__name skeleton-text skeleton-anim"
+                      ></span>
+                      <span
+                        class="product__info__price skeleton-text-sm skeleton-anim"
+                      ></span>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <div
+                      src="assets/images/products/adidas-stan-smith-white.png"
+                      alt="product"
+                      class="product__image skeleton-image skeleton-anim"
+                    ></div>
+                    <div class="product__info">
+                      <span
+                        class="product__info__name skeleton-text skeleton-anim"
+                      ></span>
+                      <span
+                        class="product__info__price skeleton-text-sm skeleton-anim"
+                      ></span>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <div
+                      src="assets/images/products/adidas-stan-smith-white.png"
+                      alt="product"
+                      class="product__image skeleton-image skeleton-anim"
+                    ></div>
+                    <div class="product__info">
+                      <span
+                        class="product__info__name skeleton-text skeleton-anim"
+                      ></span>
+                      <span
+                        class="product__info__price skeleton-text-sm skeleton-anim"
+                      ></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card top-categories">
+              <h2 class="card__title">Ventes par catégories</h2>
+              <div class="card__container">
+                <canvas id="top-categories"></canvas>
+              </div>
+            </div>
+            <div class="card orders">
+              <div class="card__container">
+                <table class="orders__table">
+                  <caption>
+                    Dernières commandes
+                  </caption>
+                  <tbody>
+                    <tr>
+                      <th>Produit</th>
+                      <th>Date</th>
+                      <th>Client</th>
+                      <th>Statut</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="product">
+                          <!-- Switching to image after fetching -->
+                          <div
+                            class="product__image skeleton-image skeleton-anim"
+                          ></div>
+                          <div class="product__info">
+                            <span
+                              class="product__info__name skeleton-text skeleton-anim"
+                            ></span>
+                            <span
+                              class="product__info__price skeleton-text-sm skeleton-anim"
+                            ></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td>
+                        <span
+                          class="order__status skeleton-status skeleton-anim"
+                        ></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="product">
+                          <div
+                            class="product__image skeleton-image skeleton-anim"
+                          ></div>
+                          <div class="product__info">
+                            <span
+                              class="product__info__name skeleton-text skeleton-anim"
+                            ></span>
+                            <span
+                              class="product__info__price skeleton-text-sm skeleton-anim"
+                            ></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td>
+                        <span
+                          class="order__status skeleton-status skeleton-anim"
+                        ></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="product">
+                          <div
+                            class="product__image skeleton-image skeleton-anim"
+                          ></div>
+                          <div class="product__info">
+                            <span
+                              class="product__info__name skeleton-text skeleton-anim"
+                            ></span>
+                            <span
+                              class="product__info__price skeleton-text-sm skeleton-anim"
+                            ></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td>
+                        <span
+                          class="order__status skeleton-status skeleton-anim"
+                        ></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="product">
+                          <div
+                            class="product__image skeleton-image skeleton-anim"
+                          ></div>
+                          <div class="product__info">
+                            <span
+                              class="product__info__name skeleton-text skeleton-anim"
+                            ></span>
+                            <span
+                              class="product__info__price skeleton-text-sm skeleton-anim"
+                            ></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td><span class="skeleton-text skeleton-anim"></span></td>
+                      <td>
+                        <span
+                          class="order__status skeleton-status skeleton-anim"
+                        ></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div class="notification-popup">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 96 960 960"
+        >
+          <path
+            d="M160 856v-60h84V490q0-84 49.5-149.5T424 258v-29q0-23 16.5-38t39.5-15q23 0 39.5 15t16.5 38v29q81 17 131 82.5T717 490v306h83v60H160Zm320-295Zm0 415q-32 0-56-23.5T400 896h160q0 33-23.5 56.5T480 976ZM304 796h353V490q0-74-51-126t-125-52q-74 0-125.5 52T304 490v306Z"
+          />
+        </svg>
+        <span>Vous avez reçu une nouvelle notification.</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 -960 960 960"
+          class="close"
+        >
+          <path
+            d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
+          />
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>
