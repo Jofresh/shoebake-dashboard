@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
 
     <!-- Style -->
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/style.min.css" />
 
     <!-- Font -->
     <link rel="preload" href="assets/fonts/Outfit.ttf" as="font" crossorigin />
@@ -216,21 +216,13 @@
         <div class="dashboard__content">
           <div class="dashboard__headline">
             <h1>Vue d'ensemble</h1>
-            <div class="filters">
-              <div class="period__filter">
-                <span data-filter="day">Jour</span>
-                <span data-filter="week">Semaine</span>
-                <span data-filter="month" class="active">Mois</span>
-                <span data-filter="year">Année</span>
-              </div>
-            </div>
           </div>
           <div class="dashboard__grid">
             <!-- Mobile cards only -->
             <div class="card visitors">
               <div class="card__container">
                 <div class="metrics">
-                  <span class="metrics__name">Total visiteurs</span>
+                  <span class="metrics__name">Visiteurs</span>
                   <span class="metrics__value">8236</span>
                 </div>
                 <div class="percentage percentage--decrease">
@@ -269,7 +261,17 @@
             </div>
             <!-- Default cards -->
             <div class="card incomes">
-              <h2 class="card__title">Revenus</h2>
+              <div class="card__header">
+                <h2 class="card__title">Revenus</h2>
+                <div class="filters">
+                  <div class="period__filter">
+                    <span data-filter="day">Jour</span>
+                    <span data-filter="week">Semaine</span>
+                    <span data-filter="month" class="active">Mois</span>
+                    <span data-filter="year">Année</span>
+                  </div>
+                </div>
+              </div>
               <div class="card__container">
                 <canvas id="incomes"></canvas>
               </div>
@@ -325,6 +327,8 @@
                   </div>
                 </div>
               </div>
+              <div class="scrollright"></div>
+              <div class="scrolldown"></div>
             </div>
             <div class="card top-categories">
               <h2 class="card__title">Ventes par catégories</h2>
@@ -333,18 +337,18 @@
               </div>
             </div>
             <div class="card orders">
+              <h2 class="card__title">Dernières commandes</h2>
               <div class="card__container">
                 <table class="orders__table">
-                  <caption>
-                    Dernières commandes
-                  </caption>
-                  <tbody>
+                  <thead>
                     <tr>
                       <th>Produit</th>
                       <th>Date</th>
                       <th>Client</th>
                       <th>Statut</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td>
                         <div class="product">
@@ -444,6 +448,7 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="scrolldown"></div>
               </div>
             </div>
           </div>
