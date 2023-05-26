@@ -123,13 +123,13 @@ const CHARTJS_OPTIONS = {
 };
 
 const incomesCtx = document.getElementById("incomes").getContext("2d");
-const gradientBlue = incomesCtx.createLinearGradient(0, 0, 0, 400);
-gradientBlue.addColorStop(0, "rgba(52, 155, 229, 1)");
-gradientBlue.addColorStop(1, "rgba(52, 155, 229, 0)");
+
+const gradient = incomesCtx.createLinearGradient(0, 0, 0, 300);
+gradient.addColorStop(0, "rgba(252, 82, 150, 1)");
+gradient.addColorStop(1, "rgba(246, 112, 98, 0)");
 
 const COLORS = {
   blue: {
-    gradient: gradientBlue,
     default: "#349be5",
   },
   green: {
@@ -140,6 +140,13 @@ const COLORS = {
   },
   orange: {
     default: "#f39c12",
+  },
+  purple: {
+    default: "#9b5de5",
+  },
+  pink: {
+    gradient,
+    default: "#fc5296",
   },
 };
 
@@ -154,12 +161,13 @@ const incomesChart = new Chart(incomesCtx, {
         label: "Revenus",
         data: [],
         fill: true,
-        backgroundColor: COLORS.blue.gradient,
-        pointBackgroundColor: COLORS.blue.default,
-        borderColor: COLORS.blue.default,
+        backgroundColor: COLORS.pink.gradient,
+        pointBackgroundColor: COLORS.pink.default,
+        borderColor: COLORS.pink.default,
         tension: 0.4,
         borderWidth: 2,
-        pointRadius: 3,
+        pointRadius: 6,
+        pointHoverRadius: 9,
       },
     ],
   },
@@ -195,7 +203,7 @@ const topCategoriesChart = new Chart(topCategoriesCtx, {
         label: "Top Categories",
         data: [],
         backgroundColor: [
-          COLORS.blue.default,
+          COLORS.purple.default,
           COLORS.red.default,
           COLORS.orange.default,
           COLORS.green.default,
@@ -241,7 +249,8 @@ sidebarCloseElt.addEventListener("click", () => {
 });
 notificationCloseElt.addEventListener("click", () => {
   notificationElt.classList.remove("active");
-  resetTimer();
+  if (!window.__SHOW_NOTIFICATION) return;
+  setNotificationTimeout();
 });
 
 // ## Clickable/selectable elements
@@ -308,10 +317,21 @@ function generateRandomValues(length, min, max) {
   );
 }
 
-function resetTimer() {
-  if (notificationInterval == null) return;
-  clearInterval(notificationInterval);
+function setNotificationTimeout() {
+  if (notificationInterval != null) clearInterval(notificationInterval);
+
   notificationInterval = setInterval(() => {
+    if (!window.__SHOW_NOTIFICATION) {
+      if (notificationElt.classList.contains("active"))
+        notificationElt.classList.remove("active");
+
+      clearInterval(notificationInterval);
+      notificationInterval = null;
+
+      console.info("Timeout cleared.");
+      return;
+    }
+
     toggleEltActive(notificationElt);
   }, NOTIFICATION_DELAY);
 }
@@ -422,10 +442,7 @@ function populateOrders(orders) {
     return orderRowElt;
   };
 
-  // Delete all <tr> elements in tbody except the first one
-  parentElt.querySelectorAll("tr:not(:first-child)").forEach((tr) => {
-    tr.remove();
-  });
+  parentElt.innerHTML = "";
 
   orders.forEach((order) => {
     const orderRowElt = createOrderElement(order);
@@ -461,11 +478,12 @@ function populateOrders(orders) {
     populateOrders(fetchedOrders);
   }, ORDERS_DELAY);
 
-  /* Set the variable to `false` to disable notifications */
-  const SHOW_NOTIFICATION = false;
-  if (!SHOW_NOTIFICATION) return;
+  console.info(
+    "Set the variable `window.__SHOW_NOTIFICATION` to `false` to disable notification popup."
+  );
+  console.info("> window.__SHOW_NOTIFICATION = false;");
 
-  notificationInterval = setInterval(() => {
-    toggleEltActive(notificationElt);
-  }, NOTIFICATION_DELAY);
+  window.__SHOW_NOTIFICATION = false;
+
+  setNotificationTimeout();
 })();
