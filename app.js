@@ -483,7 +483,7 @@ function populateOrders(orders) {
   );
   console.info("> window.__SHOW_NOTIFICATION = false;");
 
-  window.__SHOW_NOTIFICATION = false;
+  window.__SHOW_NOTIFICATION = true;
 
   setNotificationTimeout();
 })();
