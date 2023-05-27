@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Outfit";
-  src: url("assets/fonts/Outfit.ttf") format("truetype");
+  src: url(/assets/fonts/Outfit.ttf) format("truetype");
 }
 
 /* Resets */
