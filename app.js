@@ -215,6 +215,7 @@ const topCategoriesChart = new Chart(topCategoriesCtx, {
   options: CHARTJS_OPTIONS,
 });
 
+let currentTheme = "light";
 // Notification interval
 const NOTIFICATION_DELAY = 10000;
 let notificationInterval;
@@ -225,6 +226,7 @@ let currentLink = document.querySelector(".sidebar__links li a.active");
 let currentPeriodFilter = document.querySelector(".period__filter span.active");
 
 // # Static elements
+const themeToggleElt = document.querySelector(".settings__theme");
 const languageElt = document.querySelector(".settings__language");
 const profileElt = document.querySelector(".settings__profile");
 const navLinks = document.querySelectorAll(".sidebar__links li a");
@@ -251,6 +253,11 @@ notificationCloseElt.addEventListener("click", () => {
   notificationElt.classList.remove("active");
   if (!window.__SHOW_NOTIFICATION) return;
   setNotificationTimeout();
+});
+themeToggleElt.addEventListener("click", () => {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+  document.body.setAttribute("data-theme", currentTheme);
+  themeToggleElt.classList.toggle("active");
 });
 
 // ## Clickable/selectable elements
@@ -483,7 +490,7 @@ function populateOrders(orders) {
   );
   console.info("> window.__SHOW_NOTIFICATION = false;");
 
-  window.__SHOW_NOTIFICATION = true;
+  window.__SHOW_NOTIFICATION = false;
 
   setNotificationTimeout();
 })();
