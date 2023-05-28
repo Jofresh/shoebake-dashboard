@@ -47,6 +47,7 @@ a {
   --filter-bd-color: #b7b9bd;
   --filter-bg-color: #fff;
   --card-bg-color: #fff;
+  --text-color-light: #5b5b5b;
 }
 
 body[data-theme="dark"] {
@@ -65,6 +66,7 @@ body[data-theme="dark"] {
   /* --filter-bd-color: #3a3a3a; */
   /* --filter-bg-color: #2a2a2a; */
   --card-bg-color: #2a2a2a;
+  --text-color-light: #bfbfbf;
 }
 
 body {
@@ -609,7 +611,7 @@ body {
 .product__info .product__info__price {
   font-weight: 300;
   font-size: 0.9rem;
-  color: #5b5b5b;
+  color: var(--text-color-light);
 }
 
 .dashboard__grid .top-categories {
@@ -740,12 +742,14 @@ body {
   display: flex;
   align-items: center;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: var(--card-bg-color);
   padding: 1rem;
   box-shadow: var(--box-shadow);
   transform: translateX(200%);
   transition: transform 0.3s ease-in-out;
   z-index: 9999;
+  color: var(--text-color);
+  border: 1px solid var(--text-color-light);
 }
 
 .notification-popup.active {
@@ -865,6 +869,10 @@ body {
   .card.orders,
   .card.top-categories {
     display: none;
+  }
+
+  .dashboard .dashboard__header .settings .settings__profile {
+    margin-left: 0;
   }
 
   .dashboard .dashboard__header .settings .settings__profile .profile__info {
